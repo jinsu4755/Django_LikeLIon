@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block blogpost %}
+    <!-- Page Content -->
+    <div class="container">
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-12">
+            <div class="col-mb-4">
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Hashtag</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    {% for hashtag in hashtags.all %}
+                                        <li style="display: inline; margin-left: 10px; margin-right: 10px;">
+                                            <a href="{% url 'crud:search' hashtag.id %}"
+                                               class="btn btn-outline-success">{{ hashtag.name }}</a>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="my-4">Blog<br>
+                    <small>{{ hashtag }} post</small>
+                </h1>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    {% for article in hashtag.article_set.all %}
+        <div class="card mb-6">
+            {% if article.image %}
+                <img class="card-img-top" src="{{ article.image.url }}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body">
+                <h2 class="card-title">{{ article.title }}</h2>
+                <p class="card-text">{{ article.content }}</p>
+                <a href="{% url 'crud:detail' article.id %}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{ article.create_at }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

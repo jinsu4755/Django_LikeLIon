@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block blogpost %}
+    <div class="card mb-4">
+            {{  error_message }}
+            <form class="card-body" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input class="card-footer" type="submit" value="submit">
+            </form>
+    </div>
+{% endblock %}

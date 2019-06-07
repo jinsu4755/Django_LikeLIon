@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block blogpost %}
+    <div class="card mb-4">
+            <form class="card-body" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input class="card-footer" type="submit" value="submit">
+            </form>
+    </div>
+{% endblock %}

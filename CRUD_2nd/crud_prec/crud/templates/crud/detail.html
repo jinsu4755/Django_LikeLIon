@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+
+
+{% block blogpost %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-12">
+
+                <!-- Title -->
+                <h1 class="mt-4">Title: {{ article.title }}</h1>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>Posted on {{ article.create_at }}</p>
+                <p>edit {{ article.published_at }}</p>
+
+                <hr>
+                {% if article.image %}
+                    <img class="img-fluid rounded" src="{{ article.image.url }}" alt="">
+                {% endif %}
+
+                <!-- Post Content -->
+                {{ article.content }}
+
+                <hr>
+                <a href="{% url 'crud:edit' article.id %}" class="btn btn-secondary">수정하기</a>
+                <a href="{% url 'crud:delete' article.id %}" class="btn btn-danger">삭제하기</a>
+
+                <hr>
+                {% for hashtag in article.hashtags.all %}
+                    <span class="btn btn-primary">{{ hashtag.name }}</span>
+                {% endfor %}
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form }}
+                            </div>
+                            <input type="submit" , value="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Single Comment -->
+                {% for comment in article.contents.all %}
+                    <div class="media mb-4">
+                        <img class="d-md-block mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <h5 style="margin-top: 15px;">익명의 사람 &nbsp;&nbsp;&nbsp;&nbsp;</h5>
+                        <div class="float-left" style="margin-top: 15px;">
+                            {{ comment.content }}
+
+                        </div>
+                        <div style="margin-top: 17px;">
+                            &nbsp;&nbsp;
+                            <a href="{% url 'crud:comment_edit' comment.id %}">
+                                <small>수정</small>
+                            </a>
+                            <a href="{% url 'crud:comment_del' comment.id %}">
+                                <small>삭제</small>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
