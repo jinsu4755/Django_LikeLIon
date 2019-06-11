@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block count %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="mt-5">About</h1>
+            <p class="lead">멋쟁이 사자처럼 7기 박진수가 만든 작품입니다.</p>
+            <p class="lead"> 단어를 써주세요 </p>
+            <a class="btn btn-outline-success" href="{% url 'wordcount:home' %}">home으로 가기</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
