@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+</head>
+<body>
+<h1> is list page</h1>
+<a href="{% url 'new' %}">create</a>
+<hr><br>
+
+{% for blog in object_list %}
+<!--object_list = 지정한 모델로 만들어진 모든 객체 목록-->
+    <h2>{{ blog.title }}</h2>
+    <h5>{{ blog.create_at }}</h5>
+    <p>{{ blog.body }}</p>
+    <a href="{% url 'detail' blog.id %}"> detail </a>
+    <a href="{% url 'update' blog.id %}"> update </a>
+    <a href="{% url 'delete' blog.id %}"> delete </a>
+    <br>
+{% endfor %}
+</body>
+</html>
